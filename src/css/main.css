@@ -1,0 +1,76 @@
+@import url("../components/icon/icon.css");
+
+* {
+    font-size: 13px;
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-primary: #1aa4c8;
+    --color-hover: #0582a2;
+    --color-hover-table: #1aa4c833;
+    --color-focus: #1aa4c8;
+    --color-active: #28b7dc;
+    --color-disable: #8cd1e3;
+    --color-border-default: #afafaf;
+    --color-error: #ff0000;
+    --background-url: url(../assets/icon/qlts-icon.svg);
+}
+
+#app {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 216px 1fr;
+    grid-template-rows: 44px 1fr;
+    overflow: auto;
+    position: relative;
+}
+
+#app:has(.collapse) {
+    grid-template-columns: 66px;
+}
+
+a {
+    text-decoration: none;
+}
+
+label {
+    display: block;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.right-text {
+    text-align: right;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay--dialog {
+    z-index: 12;
+}
+b {
+    word-break: break-word !important;
+}
+
+.tippy-box[data-theme~="tomato"] {
+    word-break: break-all;
+    word-wrap: break-word;
+    max-width: 500px;
+}

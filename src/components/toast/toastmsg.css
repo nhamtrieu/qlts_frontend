@@ -1,0 +1,138 @@
+.toast-message {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.078);
+    justify-content: space-between;
+    line-height: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.toast-msg__left {
+    display: flex;
+    margin-left: 16px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.toast-msg__right {
+    display: flex;
+    margin-right: 16px;
+}
+
+.toast-msg .toast-msg__content {
+    max-width: 460px;
+    text-align: left;
+}
+
+.toast-msg .toast-msg__title {
+    font-weight: 500;
+}
+
+.toast-msg .toast-msg__bodytext {
+    color: #1f1f1f;
+}
+
+.toast-msg .toast-msg__action {
+    margin-right: 16px;
+    text-decoration: underline;
+    font-size: 14px;
+    color: #1f1f1f;
+    font-weight: 500;
+}
+
+.toast-msg .toast-msg__close {
+    font-size: 16px;
+    color: #999;
+}
+
+.toast-msg .toast-msg__icon {
+    margin-right: 8px;
+}
+
+.toast-msg {
+    min-width: 350px;
+    cursor: default;
+}
+
+.toast-message-icon-close {
+    margin-right: 16px;
+}
+
+.toast-msg--success .toast-msg__title {
+    color: #50b83c;
+}
+
+.toast-msg--error {
+    display: none;
+    min-width: 650px;
+    min-height: 74px;
+}
+
+.toast-msg--success .toast-msg__icon i {
+    color: #50b83c;
+}
+
+.toast-msg--error .toast-msg__icon {
+    color: #de3618;
+}
+
+.toast-msg--error .toast-msg__title {
+    color: #de3618;
+}
+
+.toast-msg--error .toast-msg__bodytext a {
+    color: #1f1f1f;
+}
+
+.toast-msg--alert {
+    display: none;
+    min-width: 498px;
+    min-height: 56px;
+}
+
+.toast-msg--alert .toast-msg__title,
+.toast-msg--alert .toast-msg__icon {
+    color: #f49342;
+}
+
+.toast-msg--infor {
+    display: none;
+    min-width: 472px;
+    min-height: 56px;
+}
+
+.toast-msg--infor .toast-msg__title,
+.toast-msg--infor .toast-msg__icon {
+    color: #009eeb;
+}
+
+@keyframes side {
+    0% {
+        transform: translateX(400px);
+    }
+
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+.toast-message__pseudo {
+    width: 4px;
+    height: 72px;
+    border-radius: 4px 0 0 4px;
+}
+
+.toast-message:has(.toast-msg--success) .toast-message__pseudo {
+    background-color: #50b83c;
+}
+
+.toast-message:has(.toast-msg--error) .toast-message__pseudo {
+    background-color: #de3618;
+}
+
+.toast-message:has(.toast-msg--info) .toast-message__pseudo {
+    background-color: #009eeb;
+}

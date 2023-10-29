@@ -1,0 +1,125 @@
+.login-container {
+    height: 100% !important;
+    color: #1f2229;
+    margin: 0;
+    line-height: 1.6;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    grid-column: 1 / -1; /* Chiếm toàn bộ cột */
+    grid-row: 1 / -1;
+}
+
+.login-main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../assets/image/background-login.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.page-title {
+    position: absolute;
+    top: -9px;
+}
+
+.page-title img {
+    height: 57px;
+}
+
+.login-form {
+    width: 770px;
+    display: flex;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    position: absolute;
+    height: 497px;
+}
+
+.left {
+    width: 50%;
+}
+
+.left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.right {
+    flex: 1;
+}
+
+.main-login {
+    margin: 30px 44px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.logo-login {
+    margin: 0 auto;
+    background-repeat: no-repeat;
+    height: 49px;
+    width: 114px;
+    background-size: cover;
+    background-image: url("../assets/image/Logo_MISA_VN.svg");
+    background-size: contain;
+}
+
+.logo-text {
+    margin: 24px 0 0;
+    font-size: 14px;
+    line-height: 17px;
+    color: #586074;
+}
+
+.logo-text .medium {
+    font-weight: 500;
+}
+
+.login-input,
+.login-action {
+    width: 100%;
+}
+
+.login-normal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 50px;
+}
+
+input::placeholder {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-size: 13px;
+}
+
+.username-login {
+    position: relative;
+}
+
+.forgot-password {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 20px;
+    color: var(--color-primary);
+    text-align: center;
+    cursor: pointer;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}

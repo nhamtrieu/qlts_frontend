@@ -1,0 +1,128 @@
+.overlay-increase-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form {
+    width: 950px;
+    height: 650px;
+    background-color: #fff;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-increase {
+    position: absolute;
+    z-index: 5;
+    height: auto;
+    min-height: 712px;
+}
+
+.header-increase-form {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-increase-form .title {
+    color: #000;
+}
+
+.main-increase-form {
+    background-color: #f4f7ff;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-increase-form {
+    height: 50px;
+    background-color: #e5e5e5;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-right: 16px;
+}
+
+.increase-master {
+    padding: 10px 16px;
+}
+
+.increase-master .textfield__msg {
+    margin-top: 0;
+}
+
+.increase-master-header,
+.increase-details-header {
+    font-weight: 600;
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
+.increase-details {
+    flex: 1;
+    padding: 10px 16px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+}
+
+.increase-details-main-header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.input-field {
+    padding: 16px 14px 10px 14px;
+    background-color: #fff;
+}
+
+.input-field .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.increase-details-main {
+    flex: 1;
+    padding: 16px 14px 0 14px;
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.increase-details-table {
+    flex: 1;
+}
+
+.increase-details-main .tbl {
+    min-width: unset !important;
+}
+
+.row + .row {
+    margin-top: 16px;
+}
+
+.input-field .row .group {
+    width: 33.3333%;
+    height: 74px;
+}
+
+.chose-asset {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}

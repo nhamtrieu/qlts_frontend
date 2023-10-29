@@ -1,0 +1,71 @@
+@import url("../input/input.css");
+.combobox {
+    /* position: relative; */
+}
+
+.combobox__list table {
+    border-collapse: collapse;
+}
+
+.combobox__list {
+    position: absolute;
+    box-shadow: 0 4px 16px rgba(23, 27, 42, 0.24);
+    top: 100%;
+    width: 150%;
+    max-height: 200px;
+    background-color: #fff;
+    z-index: 4;
+    overflow: auto;
+}
+
+.combobox__list table {
+    width: 100%;
+}
+
+.combobox__list thead {
+    background-color: rgb(97, 202, 228);
+    border-radius: 3px;
+}
+
+.combobox__list tr {
+    border: none;
+    border-top: 2px solid #f5f5f5;
+}
+.combobox__list tr th:first-child,
+.combobox__list tr td:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.combobox__list tr th:last-child,
+.combobox__list tr td:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.combobox__list tbody tr:not(.selected):hover {
+    background-color: var(--color-focus) !important;
+    color: #fff;
+}
+
+.combobox__list .selected {
+    background-color: var(--color-hover-table) !important;
+}
+
+.combobox__list .focus {
+    background-color: var(--color-focus) !important;
+    color: #fff;
+}
+
+.login-input label {
+    display: none;
+}
+
+.login-input .textfield--dropdown-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50% !important;
+    transform: translateY(-50%);
+    margin-top: 2px;
+}

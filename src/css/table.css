@@ -1,0 +1,180 @@
+@import url("../components/input/input.css");
+.content-table {
+    position: relative;
+    border: 1px solid var(--color-border-default);
+    border-radius: 3.5px;
+    flex: 1;
+}
+
+.tbl {
+    width: 100%;
+    min-width: 1260px;
+    border-collapse: collapse;
+    border-radius: 4px;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #f5f5f5;
+    z-index: 3;
+}
+
+tbody {
+    background-color: #ffffff;
+}
+
+tr,
+th,
+td {
+    padding: 0 10px;
+    text-align: left;
+}
+
+th {
+    color: #1f1f1f;
+    height: 38px;
+}
+
+td {
+    height: 40px;
+}
+
+tr {
+    border-bottom: 1px solid var(--color-border-default);
+    cursor: pointer;
+    position: relative;
+}
+
+tr input {
+    cursor: pointer;
+}
+
+.tbl__action {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 700;
+    justify-content: center;
+    visibility: hidden;
+}
+
+tbody tr:hover .tbl__action {
+    display: flex;
+    visibility: visible;
+}
+
+.tbl__action--absolute {
+    display: none;
+    position: absolute;
+    column-gap: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    z-index: 1;
+}
+
+tbody tr:hover .tbl__action--absolute,
+tbody tr:hover .td__action--absolute {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 10px;
+}
+
+tbody tr.checked {
+    background-color: var(--color-hover-table);
+}
+
+tbody tr:hover {
+    background-color: var(--color-hover-table);
+}
+
+tfoot {
+    cursor: default;
+    position: sticky;
+    bottom: 0px;
+    background-color: #fff;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0px 1px var(--color-border-default);
+    z-index: 1;
+}
+
+/* tbody tr.choose {
+    background-color: var(--color-hover-table);
+    filter: brightness(1.2);
+} */
+
+input[type="checkbox"]:focus {
+    outline: none; /* Loại bỏ đường viền focus */
+}
+
+tr td.row-action,
+tr th.row-action {
+    position: absolute;
+    visibility: hidden;
+    display: flex;
+    background-color: transparent !important;
+    border: none;
+    padding: 0;
+    right: 0;
+    top: 0;
+}
+
+.asset-action {
+    visibility: visible !important;
+    align-items: center;
+    justify-content: center;
+}
+
+tr:hover td.row-action {
+    visibility: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mw-unset {
+    min-width: unset;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+thead,
+tfoot,
+tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+tbody {
+    display: block;
+    max-height: 494px;
+    overflow-y: scroll;
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: hidden;
+}
+
+td:has(input) {
+    width: 34px;
+}
+
+td:not(input) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
