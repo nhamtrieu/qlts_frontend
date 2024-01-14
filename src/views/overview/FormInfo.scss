@@ -1,0 +1,52 @@
+.form-info {
+    width: auto;
+    min-width: 500px;
+    height: auto;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 380px;
+    background-color: #fff;
+    .form__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .form__title {
+            flex: 1;
+            text-align: left;
+        }
+    }
+    .form__body {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        flex: 1;
+        .group {
+            .textfield-container {
+                display: flex;
+                align-items: center;
+                label {
+                    width: 130px;
+                }
+            }
+        }
+        .role {
+            display: flex;
+            label {
+                width: 101px;
+            }
+            .dropdown {
+                flex: 1;
+            }
+        }
+    }
+    .form__footer {
+        display: flex;
+        align-self: flex-end;
+        .btn {
+            width: 100px;
+        }
+    }
+}

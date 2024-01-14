@@ -1,0 +1,93 @@
+.register-container {
+    height: 100% !important;
+    color: #1f2229;
+    margin: 0;
+    line-height: 1.6;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    grid-column: 1 / -1; /* Chiếm toàn bộ cột */
+    grid-row: 1 / -1;
+    label {
+        margin-bottom: 0;
+    }
+    .register-main {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url("../../assets/image/background-login.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        .page-title {
+            position: absolute;
+            top: -9px;
+            img {
+                height: 57px;
+            }
+        }
+        .register-form {
+            width: 800px;
+            display: flex;
+            box-sizing: border-box;
+            border-radius: 8px;
+            background-color: #fff;
+            overflow: hidden;
+            position: absolute;
+            height: 497px;
+            .left {
+                width: 50%;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .right {
+                flex: 1;
+                .register {
+                    margin: 30px 44px 48px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    gap: 12px;
+                    .logo-register {
+                        margin: 0 auto;
+                        background-repeat: no-repeat;
+                        height: 49px;
+                        width: 114px;
+                        background-size: cover;
+                        background-image: url("../../assets/image/Logo_MISA_VN.svg");
+                        background-size: contain;
+                    }
+                    .logo-text {
+                    }
+                    .register-normal {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 16px;
+                    }
+                    .register-action {
+                        .button-login {
+                            font-size: 14px;
+                            font-weight: 500;
+                            margin-top: 20px;
+                            color: var(--color-primary);
+                            text-align: center;
+                            cursor: pointer;
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

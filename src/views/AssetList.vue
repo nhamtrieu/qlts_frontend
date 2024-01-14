@@ -171,6 +171,8 @@ import QLTSTable from "@/components/table/QLTSTable.vue";
 import QLTSDropdown from "@/components/dropdown/QLTSDropdown.vue";
 import QLTSInput from "@/components/input/QLTSInput.vue";
 import QLTSButton from "@/components/button/QLTSButton.vue";
+import { jwtDecode } from "jwt-decode";
+import route from "@/router/router";
 
 const store = useStore();
 
@@ -190,7 +192,7 @@ const listRecord = ref([]);
 const listDepartments = ref([]);
 const listAssetCategories = ref([]);
 const searchInput = ref();
-// const isLoading = ref(store.getters.loading);
+const isLoading = ref(store.getters.loading);
 
 var columns = [
     {
@@ -267,6 +269,11 @@ var columns = [
     },
 ];
 
+if (store.getters.token) {
+    const decode = jwtDecode(store.getters.token);
+    console.log(decode);
+}
+
 const isAssetListPath = computed(() => {
     return useRoute().path === "/tai-san";
 });
@@ -280,7 +287,9 @@ onMounted(async () => {
     emitter.on("getAssetList", getAssetList);
     emitter.on("duplicateAsset", duplicateAsset);
     emitter.on("showDialogDelete", showDialogDelete);
+    emitter.emit("isManage", window.location.href.includes("quan-ly"));
     store.dispatch("clearListRecordDelete");
+    console.log("assetList");
 });
 
 onUnmounted(() => {
@@ -288,6 +297,7 @@ onUnmounted(() => {
     emitter.off("getAssetList");
     emitter.off("duplicateAsset");
     emitter.off("showDialogDelete", showDialogDelete);
+    emitter.off("isManage");
 });
 
 const totalRecord = computed({
@@ -597,6 +607,11 @@ async function getListDepartments() {
         const res = await getDepartmentList();
         listDepartments.value = res;
     } catch (error) {
+        store.dispatch("setLoading", false);
+        if (error.response?.status === 401 || error.response?.status === 403) {
+            route.push("/dang-nhap");
+        }
+        console.log(error);
         showDialogError(error);
     }
 }
@@ -610,6 +625,11 @@ async function getListAssetCategories() {
         const res = await getAssetCategoryList();
         listAssetCategories.value = res;
     } catch (error) {
+        store.dispatch("setLoading", false);
+        if (error.response?.status === 401 || error.response?.status === 403) {
+            route.push("/dang-nhap");
+        }
+        console.log(error);
         showDialogError(error);
     }
 }

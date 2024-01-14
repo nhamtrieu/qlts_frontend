@@ -52,13 +52,13 @@
     color: var(--color-primary);
 }
 
-.btn--secondary:hover {
+/* .btn--secondary:hover {
     background-color: var(--color-hover-thin);
-}
+} */
 
-.btn--secondary:active {
+/* .btn--secondary:active {
     background-color: var(--color-hover-thin);
-}
+} */
 
 .btn--cancel {
     border: 1px solid #e6e6e6;

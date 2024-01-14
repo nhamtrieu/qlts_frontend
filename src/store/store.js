@@ -1,4 +1,5 @@
 import { refreshToken } from "@/apis/refreshTokenApi";
+import { jwtDecode } from "jwt-decode";
 import { createStore } from "vuex";
 
 import createPersistedState from "vuex-persistedstate";
@@ -288,6 +289,9 @@ const store = createStore({
         setIdIncreaseEditing(state, id) {
             state.idIncreaseEditing = id;
         },
+        decodeToken(state) {
+            return jwtDecode(state.token);
+        },
     },
     actions: {
         refreshToken({ commit, state }, data) {
@@ -345,6 +349,9 @@ const store = createStore({
         },
         setIdIncreaseEditing({ commit }, id) {
             commit("setIdIncreaseEditing", id);
+        },
+        decodeToken({ commit }) {
+            commit("decodeToken");
         },
     },
     getters: {

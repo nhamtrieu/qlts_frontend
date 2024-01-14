@@ -1,7 +1,8 @@
 <template>
     <div :class="['header', props.isCollapsed ? 'collapse' : '']">
         <div class="main-header">
-            <div class="header__title">Danh sách tài sản</div>
+            <div v-if="isManage" class="header__title">Quản lý tổ chức</div>
+            <div v-else class="header__title">Danh sách tài sản</div>
 
             <div class="header__action">
                 <div class="heder__action-org">Sở tài chính</div>
@@ -41,10 +42,11 @@
         <template v-if="isShowAction">
             <div class="header-menu-action">
                 <QLTSButton
-                    type="primary"
+                    type="secondary"
                     title="Đăng xuất"
                     @click="handleLogout"
                     v-on-click-outside="hideAction"
+                    style="color: red"
                     >Đăng xuất</QLTSButton
                 >
             </div>
@@ -53,8 +55,9 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
+import emmiter from "tiny-emitter/instance";
 import route from "@/router/router";
 import { vOnClickOutside } from "@vueuse/components";
 
@@ -65,9 +68,17 @@ import QLTSButton from "../button/QLTSButton.vue";
 const store = useStore();
 const isShowAction = ref(false);
 const year = ref(2023);
+const isManage = ref(false);
+
+onMounted(() => {
+    emmiter.on("isManage", (data) => {
+        console.log(data);
+        isManage.value = data;
+    });
+});
 
 const handleLogout = () => {
-    localStorage.removeItem("qlts_token");
+    localStorage.setItem("qlts_token", "logout");
     store.dispatch("logout");
     route.push("/dang-nhap");
 };
@@ -82,6 +93,9 @@ const toogleAction = () => {
 
 const props = defineProps({
     isCollapsed: {
+        type: Boolean,
+    },
+    isManage: {
         type: Boolean,
     },
 });

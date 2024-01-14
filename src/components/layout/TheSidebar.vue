@@ -65,71 +65,28 @@ import { useStore } from "vuex";
 
 const navListItem = ref([
     {
-        text: resource.Sidebar.Overview,
+        text: "Quản lý",
         icon: "overview",
         title: resource.Sidebar.Overview,
         isActive: false,
         isDropdown: false,
-        link: resource.Link.Overview,
+        link: "/quan-ly",
     },
     {
         text: resource.Sidebar.Asset,
         icon: "asset",
         title: resource.Sidebar.Asset,
         isActive: false,
-        isDropdown: true,
+        isDropdown: false,
         link: resource.Link.Asset,
-        children: [
-            {
-                text: "Ghi tăng",
-                link: "/tai-san/ghi-tang",
-            },
-            {
-                text: "Khác",
-                link: "/tai-san/khac",
-            },
-        ],
-        isShowChildrenMenu: false,
     },
     {
-        text: resource.Sidebar.RoadSystemAsset,
-        icon: "asset-2nd",
-        title: resource.Sidebar.RoadSystemAsset,
-        isActive: false,
-        isDropdown: true,
-        link: "/",
-    },
-    {
-        text: resource.Sidebar.Tools,
-        icon: "tool",
-        title: resource.Sidebar.Tools,
-        isActive: false,
-        isDropdown: true,
-        link: "/",
-    },
-    {
-        text: resource.Sidebar.Category,
-        icon: "category",
-        title: resource.Sidebar.Category,
+        text: "Ghi tăng",
+        icon: "asset",
+        title: "Ghi tăng",
         isActive: false,
         isDropdown: false,
-        link: "/",
-    },
-    {
-        text: resource.Sidebar.Search,
-        icon: "search-nav",
-        title: resource.Sidebar.Search,
-        isActive: false,
-        isDropdown: true,
-        link: "/",
-    },
-    {
-        text: resource.Sidebar.Report,
-        icon: "report",
-        title: resource.Sidebar.Report,
-        isActive: false,
-        isDropdown: true,
-        link: "/",
+        link: "/ghi-tang",
     },
 ]);
 

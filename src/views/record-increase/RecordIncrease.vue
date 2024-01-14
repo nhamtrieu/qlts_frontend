@@ -2,8 +2,11 @@
     <div class="container-record-increase">
         <div class="header">
             <div class="text">Ghi tăng tài sản</div>
-            <div class="action">
-                <QLTSButton type="primary" @click="showRecordIncreaseForm"
+            <div class="action" v-show="!store.getters.loading && isData">
+                <QLTSButton
+                    type="primary"
+                    @click="showRecordIncreaseForm"
+                    v-show="isIncreaseAction"
                     >Thêm</QLTSButton
                 >
                 <div class="action-icon" @click="toggleDetailTable">
@@ -36,7 +39,10 @@
             </div>
         </div>
         <div class="main">
-            <div class="header-main" v-if="!isFullScreen">
+            <div
+                class="header-main"
+                v-show="!isFullScreen && !store.getters.loading && isData"
+            >
                 <QLTSInput
                     style="width: 300px"
                     typeField="with-icon"
@@ -77,6 +83,7 @@
             </div>
             <div class="increase-main">
                 <QLTSTable
+                    v-show="!store.getters.loading && isData"
                     ref="masterTblRef"
                     :columns="columns"
                     :data="data"
@@ -95,10 +102,11 @@
                     @deleteItem="deleteItem"
                     @setDataDetailTable="setDataDetailTable"
                     :showEdit="showEdit"
-                    :isIncreaseAction="true"
+                    :isIncreaseAction="isIncreaseAction"
                     :is-context-menu="true"
                     :context-menu-type="QLTSEnum.ContextMenuType.Increase"
                     :isMasterTable="true"
+                    :isContextMenu="isIncreaseAction"
                     v-if="!isFullScreen"
                 />
                 <QLTSPagination
@@ -112,9 +120,17 @@
                 <div
                     class="resize"
                     @mousedown="startResize"
-                    v-if="isShowDetailTable && !isFullScreen"
+                    v-if="
+                        isShowDetailTable &&
+                        !isFullScreen &&
+                        !store.getters.loading &&
+                        isData
+                    "
                 ></div>
-                <div class="detail-table" v-if="isShowDetailTable">
+                <div
+                    class="detail-table"
+                    v-if="isShowDetailTable && !store.getters.loading && isData"
+                >
                     <div class="header">
                         <div class="detail-header">Thông tin chi tiết</div>
                         <div class="screen-action" @click="toggleFullScreen">
@@ -144,7 +160,7 @@
                         :columns="headerInfo"
                         :data="isData && dataInfo"
                         ref="detailTblRef"
-                        :is-increase-action="true"
+                        :is-increase-action="isIncreaseAction"
                         :style="{
                             maxHeight: isFullScreen
                                 ? 540 + 'px'
@@ -158,6 +174,7 @@
                         @showAssetIncreaseForm="showAssetIncreaseForm"
                         :showEdit="showFormEditIncreaseAsset"
                         @deleteItem="deleteIncreaseAsset"
+                        :isContextMenu="isIncreaseAction"
                     />
                 </div>
             </div>
@@ -201,6 +218,14 @@
             @deleteRecords="deleteRecords"
             @submitForm="onSubmitForm"
         />
+        <div
+            v-show="!store.getters.loading && !isData"
+            class="loading"
+            style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;'
+                "
+        >
+            <h1 style="font-size: 20px">Không có dữ liệu</h1>
+        </div>
     </div>
 </template>
 
@@ -209,6 +234,7 @@ import { onMounted, ref, computed, onUnmounted, reactive } from "vue";
 import { vOnClickOutside } from "@vueuse/components";
 import { useStore } from "vuex";
 import emitter from "tiny-emitter/instance";
+import { jwtDecode } from "jwt-decode";
 
 import QLTSButton from "@/components/button/QLTSButton.vue";
 import QLTSIcon from "@/components/icon/QLTSIcon.vue";
@@ -236,6 +262,7 @@ import {
 import format from "@/helper/format";
 import { deleteSingle } from "@/apis/increaseApis";
 import { showDialogError, showToastMsg } from "@/helper/common";
+import { getUserRole } from "@/apis/userApis";
 
 const store = useStore();
 
@@ -371,9 +398,15 @@ const dialogIncrease = reactive({
 const isData = ref(false);
 const recordIncreaseForm = ref();
 const isEditIncreaseAsset = ref(false);
+const userId = jwtDecode(store.getters.token).userId;
+const userRole = ref("");
+const isIncreaseAction = ref(false);
+console.log("isIncreaseAction", isIncreaseAction);
 
 onMounted(async () => {
     loadingData(store.getters.filterIncrease);
+    userRole.value = await getUserRole(userId);
+    isIncreaseAction.value = userRole.value.RoleName === "Admin";
     store.dispatch("resetIncreaseFilter");
     emitter.on("deleteRecords", deleteRecords);
     emitter.on("showIncreaseEdit", showEdit);
@@ -455,6 +488,10 @@ async function loadingData(filterObject, increaseId = null) {
         store.commit("setIncreasePageNumber", response.PageNumber);
         store.commit("setIncreasePageSize", response.PageSize);
         data.value = response.Data;
+        if (data.value.length < 1) {
+            store.dispatch("setLoading", false);
+            return;
+        }
         data.value.map((item, index) => {
             item.index =
                 store.getters.filterIncrease.pageSize *
@@ -762,7 +799,6 @@ const deleteRecords = async () => {
             store.dispatch("setLoading", true);
             await deleteMany(listIds);
             store.commit("setIncreasePageNumber", 1);
-
             dataInfo.value.length = 0;
             store.dispatch("setLoading", false);
             showToastMsg(
@@ -792,8 +828,16 @@ const deleteRecords = async () => {
         );
         await loadingData(store.getters.filterIncrease);
         store.dispatch("setIdIncreaseEditing", "");
+        dialogIncrease.isShow = false;
     } catch (error) {
-        showDialogError(error);
+        console.log(error);
+        dialogIncrease.isShow = false;
+        store.dispatch("setLoading", false);
+        if (error.response.status === 403) {
+            showDialogError("Bạn không có quyền xóa chứng từ này");
+        } else {
+            showDialogError(error);
+        }
     }
 };
 

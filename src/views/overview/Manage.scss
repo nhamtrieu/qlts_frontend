@@ -1,0 +1,29 @@
+.manage-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    .manage-org {
+        display: flex;
+        flex: 1;
+        padding: 20px;
+        .user-info {
+            flex: 1;
+        }
+        .org-info {
+            flex: 2;
+        }
+    }
+    .form-edit-user {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.16);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10;
+    }
+}

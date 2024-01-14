@@ -57,7 +57,25 @@
                             <QLTSButton type="primary" @click="handleLogin"
                                 >Đăng nhập</QLTSButton
                             >
-                            <div class="forgot-password">Quên mật khẩu</div>
+                            <div
+                                style="
+                                    display: flex;
+                                    justify-content: space-between;
+                                "
+                            >
+                                <div>
+                                    Bạn chưa có tài khoản?
+                                    <router-link to="/dang-ky"
+                                        >Đăng ký</router-link
+                                    >
+                                </div>
+                                <div
+                                    class="forgot-password"
+                                    @click="() => route.push('quen-mat-khau')"
+                                >
+                                    Quên mật khẩu
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,7 +137,7 @@ const typeDialog = ref("error");
 const messageDialog = ref("");
 const listToastMsg = ref([]);
 onMounted(() => {
-    username.value.onFocus();
+    console.log("login");
     emitter.on("hideDialogError", hideDialogError);
 });
 
@@ -165,11 +183,9 @@ const handleLogin = async () => {
         localStorage.setItem("qlts_token", response.data.token);
         route.push(resource.Link.Asset);
     } catch (error) {
-        // console.log(error.response.data.UserMessage);
         messageDialog.value = error.response.data.UserMessage;
         isLoading.value = false;
         messageDialog.value = "<b>" + error.response.data?.UserMessage + "</b>";
-        // isShowWarning.value = true;
         showToastMsg(QLTSEnum.ToastMsg.Error, error.response.data?.UserMessage);
     }
 };

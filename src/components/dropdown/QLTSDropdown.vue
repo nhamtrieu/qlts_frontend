@@ -13,6 +13,7 @@
                 type="text"
                 :isDropdown="true"
                 :modelValue="modelValue"
+                :isDisabled="isReadonly"
             />
 
             <div v-if="isShow" class="dropdown__list">
@@ -52,6 +53,7 @@
                 :isReadonly="true"
                 typeIcon="box"
                 :modelValue="modelValue"
+                :placeholder="placeholder"
             />
             <div v-if="isShow" class="dropdown__list">
                 <div
@@ -95,6 +97,9 @@ const props = defineProps({
     isIconCheck: {
         default: true,
     },
+    placeholder: {
+        default: "",
+    },
     type: {
         default: "",
         validator(value) {
@@ -105,6 +110,9 @@ const props = defineProps({
     modelValue: {},
     listItem: {
         default: [],
+    },
+    isReadonly: {
+        default: false,
     },
 });
 

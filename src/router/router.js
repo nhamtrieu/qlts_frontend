@@ -4,25 +4,39 @@ import TheMain from "@/components/layout/TheMain";
 import LoginForm from "@/auth/LoginForm.vue";
 import resource from "@/helper/resource";
 import HomePage from "@/views/HomePage.vue";
-import AssetOverview from "@/views/overview/AssetOverview.vue";
+import Manage from "@/views/overview/Manage.vue";
 import AssetList from "@/views/AssetList.vue";
 import RecordIncrease from "@/views/record-increase/RecordIncrease.vue";
+import Register from "@/auth/register/Register.vue";
 
 const routes = [
-    { path: "/", redirect: resource.Link.Login, component: LoginForm },
     {
         path: resource.Link.Login,
         name: "LoginForm",
         component: LoginForm,
         beforeEnter: (to, from, next) => {
-            const store = useStore();
             const isValidToken = localStorage.getItem("qlts")?.isValidToken;
+            const token = localStorage.getItem("qlts_token");
             if (isValidToken) {
+                console.log("isValidToken", isValidToken);
                 next({ name: "HomePage" });
             } else {
-                next();
+                if (token) {
+                    next();
+                } else {
+                    next({ name: "Register" });
+                }
             }
         },
+    },
+    {
+        path: "/dang-ky",
+        component: Register,
+        name: "Register",
+    },
+    {
+        path: "/quen-mat-khau",
+        component: import("@/auth/forgot-password/ForgotPassword.vue"),
     },
     {
         path: "/",
@@ -30,19 +44,20 @@ const routes = [
         component: HomePage,
         children: [
             {
-                path: resource.Link.Overview,
+                path: "/quan-ly",
                 name: "Overview",
-                component: AssetOverview,
+                component: Manage,
             },
             {
                 path: resource.Link.Asset,
                 name: "Asset",
                 component: AssetList,
-                children: [
-                    { path: "/", component: AssetList },
-                    { path: "/tai-san/ghi-tang", component: RecordIncrease },
-                    { path: "/tai-san/khac" },
-                ],
+                children: [{ path: "/", component: AssetList }],
+            },
+            {
+                path: "/ghi-tang",
+                name: "Increase",
+                component: RecordIncrease,
             },
         ],
         meta: {

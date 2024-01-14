@@ -1,0 +1,31 @@
+.user-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .user-info__title {
+        text-align: center;
+        font-size: 24px;
+    }
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .user-info__avatar {
+            text-align: center;
+            img {
+                width: 200px;
+                border-radius: 50%;
+            }
+        }
+        .user-info__detail {
+            display: flex;
+            justify-content: space-between;
+            .right,
+            .left {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    }
+}

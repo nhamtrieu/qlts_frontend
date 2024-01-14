@@ -10,6 +10,7 @@
                 :placeholder="placeholder"
                 :value="modelValue"
                 @input="onInput($event.target.value)"
+                :disabled="isDisabled"
             />
             <div v-if="isIconLeft" class="textfield__icon">
                 <QLTSIcon :type="typeIcon" :icon="icon" />

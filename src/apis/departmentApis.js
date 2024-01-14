@@ -1,6 +1,6 @@
 import axios from "./config-interceptor.js";
 
-const url = "https://localhost:7220/api/v1/DepartmentsControler";
+const url = "https://localhost:7220/api/v1/Departments";
 
 /**
  * Lấy danh sách phòng ban

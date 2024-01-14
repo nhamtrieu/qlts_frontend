@@ -671,10 +671,6 @@ const setDataForCreate = () => {
     };
 };
 
-/**
- * Xử lý tạo data khi update bản ghi
- * Author: TTNham (30/08/2023)
- */
 const setDataForUpdate = () => {
     const data = {};
     for (const key in dataAsset) {

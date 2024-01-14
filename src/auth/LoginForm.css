@@ -34,7 +34,7 @@
 }
 
 .login-form {
-    width: 770px;
+    width: 800px;
     display: flex;
     box-sizing: border-box;
     border-radius: 8px;
@@ -114,7 +114,6 @@ input::placeholder {
 .forgot-password {
     font-size: 14px;
     font-weight: 500;
-    margin-top: 20px;
     color: var(--color-primary);
     text-align: center;
     cursor: pointer;

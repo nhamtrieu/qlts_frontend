@@ -42,7 +42,14 @@
 </template>
 
 <script setup>
-import { ref, reactive, provide, onMounted, onUnmounted } from "vue";
+import {
+    ref,
+    reactive,
+    provide,
+    onMounted,
+    onUnmounted,
+    watchEffect,
+} from "vue";
 import emitter from "tiny-emitter/instance";
 import { useStore } from "vuex";
 import route from "@/router/router";
@@ -75,7 +82,6 @@ const toastMsg = reactive({
 });
 const listToastMsg = ref([]);
 const isEditedForm = ref(true);
-
 const store = useStore();
 
 onMounted(async () => {
@@ -83,6 +89,7 @@ onMounted(async () => {
         token: store.getters.token,
         tokenExpiration: store.getters.tokenExpiration,
     };
+    // if (!store.getters.token) route.push(resource.Link.Login);
     if (data.token) store.dispatch("login", data);
 
     if (store.getters.isLogin) {
@@ -105,7 +112,6 @@ emitter.on("showDialogConfirmDelete", showDialogConfirmDelete);
 emitter.on("hideDialogError", hideDialogError);
 emitter.on("hideForm", onToggleForm);
 emitter.on("showFormEdit", (item, isEdited) => {
-    console.log(isEdited);
     isShowForm.value = true;
     typeForm.value = QLTSEnum.Form.Edit;
     assetEdit.value = item;

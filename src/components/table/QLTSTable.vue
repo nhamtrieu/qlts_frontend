@@ -88,7 +88,7 @@
                         ]"
                         @mouseover="checkScroll($event)"
                         v-tippy="{
-                            animation: fade,
+                            animation: 'fade',
                             placement: column.isNumber
                                 ? 'bottom-end'
                                 : column.isText
