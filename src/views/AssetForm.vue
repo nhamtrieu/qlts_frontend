@@ -349,6 +349,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted, reactive, computed } from "vue";
 import emitter from "tiny-emitter/instance";
+import { jwtDecode } from "jwt-decode";
+import { useStore } from "vuex";
 
 import QLTSButton from "@/components/button/QLTSButton.vue";
 import QLTSInput from "@/components/input/QLTSInput.vue";
@@ -367,6 +369,7 @@ import QLTSEnum from "@/helper/enum";
 import resource from "@/helper/resource";
 import format from "@/helper/format";
 import { showDialogError, showToastMsg, errorApi } from "@/helper/common";
+import { getOrgInfoByUserId } from "@/apis/userApis";
 
 const props = defineProps({
     assetId: {},
@@ -384,6 +387,10 @@ const emit = defineEmits([
     "showToastMsg",
     "typeForm",
 ]);
+
+const store = useStore();
+const dataDecode = jwtDecode(store.getters.token);
+console.log(dataDecode);
 
 let errorDialogMsg;
 const label = ref(QLTSEnum.Form.AddLabel);
@@ -408,6 +415,7 @@ const dataAsset = reactive({
     usedDate: { value: "", errorMsg: "" }, // Ngày sử dụng
     createdDate: { value: "" }, // Ngày tạo
     modifyDate: { value: "" }, // Ngày sửa
+    orgId: { value: "" }, // Id đơn vị
 });
 
 const input1 = ref();
@@ -474,6 +482,9 @@ onMounted(async () => {
     input1.value.onFocus();
     getDepartmentCode();
     getAssetCategoryCode();
+    const orgId = await getOrgInfoByUserId(dataDecode.userId);
+    console.log(orgId);
+    dataAsset.orgId.value = orgId.OrgId;
     if (props.assetEdit) {
         label.value = QLTSEnum.Form.EditLabel;
         getDataAsset(props.assetEdit);

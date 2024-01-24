@@ -57,6 +57,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from "vue";
 import { useStore } from "vuex";
+import emitter from "tiny-emitter/instance";
 
 import QLTSIcon from "@/components/icon/QLTSIcon.vue";
 import QLTSInput from "@/components/input/QLTSInput.vue";
@@ -64,7 +65,7 @@ import resource from "@/helper/resource";
 import QLTSButton from "@/components/button/QLTSButton.vue";
 import QLTSDropdown from "@/components/dropdown/QLTSDropdown.vue";
 
-import { updateUserInfo } from "@/apis/userApis";
+import { getUserRole, updateUserInfo } from "@/apis/userApis";
 
 const store = useStore();
 const props = defineProps({
@@ -87,11 +88,11 @@ const dataUser = reactive({
     RoleName: "",
 });
 
-onMounted(() => {
+onMounted(async () => {
     dataUser.FullName = props.user.FullName;
     dataUser.Email = props.user.Email;
     dataUser.PhoneNumber = props.user.PhoneNumber;
-    dataUser.RoleName = props.user.Role;
+    dataUser.RoleName = (await getUserRole(props.user.UserId)).RoleName;
     console.log("isEdit", isEdit.value);
 });
 
@@ -112,6 +113,7 @@ const handleEditUser = async () => {
         console.log("dataUser.value", dataUser, props.user);
         store.dispatch("setLoading", true);
         await updateUserInfo(props.user.UserId, dataUser);
+        emitter.emit("editUser");
         store.dispatch("setLoading", false);
         emit("closeFormInfo");
     } catch (error) {

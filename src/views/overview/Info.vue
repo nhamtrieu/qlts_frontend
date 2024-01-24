@@ -13,7 +13,7 @@
                     <div class="name">{{ dataUser.FullName }}</div>
                     <div class="email">{{ dataUser.Email }}</div>
                     <div class="phone">{{ dataUser.PhoneNumber }}</div>
-                    <div class="role">{{ userRole.RoleName }}</div>
+                    <div class="role">{{ userRole.RoleName || "User" }}</div>
                 </div>
             </div>
         </div>
@@ -32,11 +32,9 @@ const props = defineProps({
         required: true,
     },
 });
-console.log("props", props);
 onMounted(async () => {
     dataUser.value = await getUserInfo(props.dataDecode.userId);
     userRole.value = await getUserRole(props.dataDecode.userId);
-    console.log("dataUser", dataUser);
 });
 </script>
 <style scoped>

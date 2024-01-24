@@ -157,13 +157,8 @@ async function handleRegister() {
             (item) => item.OrgCode === orgChooseItem.value.split(" - ")[0]
         ).OrgId;
         console.log(data);
-        // if(data.ConfirmPassword !== data.Password) {
-        //     messageDialog.value = "Mật khẩu không khớp";
-        //     isShowWarning.value = true;
-        //     return;
-        // }
-        // return;
         const res = await register(data);
+        route.push("/dang-nhap");
         console.log(res);
     } catch (error) {
         console.error("Lỗi khi đăng ký:", error);
